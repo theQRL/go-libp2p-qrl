@@ -1,0 +1,6 @@
+# Protobuf files
+
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/theQRL/go-libp2p-qrl
+gazelle(name = "gazelle")
