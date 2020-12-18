@@ -1,7 +1,6 @@
 package crypto
 
 import (
-	"awesomeProject/pqcrypto"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	pb "github.com/libp2p/go-libp2p-core/crypto/pb"
 )
@@ -27,8 +26,8 @@ func LoadAllExtendedKeyTypes() {
 	keyLen := pb.KeyType(len(crypto.KeyTypes))
 	for _, data := range extendedKeyTypes {
 		absoluteExtendedKey := keyLen + pb.KeyType(data)
-		crypto.PubKeyUnmarshallers[absoluteExtendedKey] = pqcrypto.UnmarshalDilithiumPublicKey
-		crypto.PrivKeyUnmarshallers[absoluteExtendedKey] = pqcrypto.UnmarshalDilithiumPrivateKey
+		crypto.PubKeyUnmarshallers[absoluteExtendedKey] = UnmarshalDilithiumPublicKey
+		crypto.PrivKeyUnmarshallers[absoluteExtendedKey] = UnmarshalDilithiumPrivateKey
 		mapExtendedKeyTypes[LATTICE] = absoluteExtendedKey
 		keyLen++
 	}
