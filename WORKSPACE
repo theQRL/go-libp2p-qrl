@@ -69,8 +69,8 @@ go_repository(
 go_repository(
     name = "co_honnef_go_tools",
     importpath = "honnef.co/go/tools",
-    sum = "h1:XJP7lxbSxWLOMNdBE4B/STaqVy6L73o0knwj2vIlxnw=",
-    version = "v0.0.0-20190102054323-c2f93a96b099",
+    sum = "h1:/hemPrYIhOhy8zYrNj+069zDB68us2sMGsfkFJO0iZs=",
+    version = "v0.0.0-20190523083050-ea95bdfd59fc",
 )
 
 go_repository(
@@ -195,15 +195,15 @@ go_repository(
 go_repository(
     name = "com_github_golang_protobuf",
     importpath = "github.com/golang/protobuf",
-    sum = "h1:YF8+flBXS5eO826T4nzqPrxfhQThhXl0YzfuUPu4SBg=",
-    version = "v1.3.1",
+    sum = "h1:ZFgWrT+bLgsYPirOnRfKLYJLvssAegOj/hgyMFdJZe0=",
+    version = "v1.4.1",
 )
 
 go_repository(
     name = "com_github_google_go_cmp",
     importpath = "github.com/google/go-cmp",
-    sum = "h1:crn/baboCvb5fXaQ0IJ1SGTsTVrWpDsCWC8EGETZijY=",
-    version = "v0.3.0",
+    sum = "h1:/QaMHBdZ26BB3SSst0Iwl10Epc+xhTquomWX0oZEB6w=",
+    version = "v0.5.0",
 )
 
 go_repository(
@@ -419,8 +419,8 @@ go_repository(
 go_repository(
     name = "com_github_theqrl_go_qrllib_crypto",
     importpath = "github.com/theQRL/go-qrllib-crypto",
-    sum = "h1:MzWCvHs74DJ+Tp3AKaWklNUv+5uUZrn7rHjVVqV/QK4=",
-    version = "v0.0.0-20201216132758-851d39cc0d43",
+    sum = "h1:/gKsfTtUgU0ghZpxL8NxEPv1JGSs6uTEHQY0cPqD8P8=",
+    version = "v0.0.0-20201222125451-26856452460c",
 )
 
 go_repository(
@@ -489,8 +489,8 @@ go_repository(
 go_repository(
     name = "org_golang_google_genproto",
     importpath = "google.golang.org/genproto",
-    sum = "h1:i1Ppqkc3WQXikh8bXiwHqAN5Rv3/qDCcRk0/Otx73BY=",
-    version = "v0.0.0-20190425155659-357c62f0e4bb",
+    sum = "h1:+kGHl1aib/qcwaRi1CbqBZ1rk19r85MNUf8HaBghugY=",
+    version = "v0.0.0-20200526211855-cb27e3aa2013",
 )
 
 go_repository(
@@ -524,8 +524,8 @@ go_repository(
 go_repository(
     name = "org_golang_x_sync",
     importpath = "golang.org/x/sync",
-    sum = "h1:bjcUS9ztw9kFmmIxJInhon/0Is3p+EHBKNgquIzo1OI=",
-    version = "v0.0.0-20190227155943-e225da77a7e6",
+    sum = "h1:8gQV6CLnAEikrhgkHFbMAEhagSSnXWGV915qUMm9mrU=",
+    version = "v0.0.0-20190423024810-112230192c58",
 )
 
 go_repository(
@@ -538,6 +538,55 @@ go_repository(
 go_repository(
     name = "org_golang_x_tools",
     importpath = "golang.org/x/tools",
-    sum = "h1:/e+gpKk9r3dJobndpTytxS2gOy6m5uvpg+ISQoEcusQ=",
-    version = "v0.0.0-20190311212946-11955173bddd",
+    sum = "h1:5Beo0mZN8dRzgrMMkDp0jc8YXQKx9DiJ2k1dkvGsn5A=",
+    version = "v0.0.0-20190524140312-2c0ae7006135",
+)
+
+go_repository(
+    name = "com_github_census_instrumentation_opencensus_proto",
+    importpath = "github.com/census-instrumentation/opencensus-proto",
+    sum = "h1:glEXhBS5PSLLv4IXzLA5yPRVX4bilULVyxxbrfOtDAk=",
+    version = "v0.2.1",
+)
+
+go_repository(
+    name = "com_github_envoyproxy_go_control_plane",
+    importpath = "github.com/envoyproxy/go-control-plane",
+    sum = "h1:4cmBvAEBNJaGARUEs3/suWRyfyBfhf7I60WBZq+bv2w=",
+    version = "v0.9.1-0.20191026205805-5f8ba28d4473",
+)
+
+go_repository(
+    name = "com_github_envoyproxy_protoc_gen_validate",
+    importpath = "github.com/envoyproxy/protoc-gen-validate",
+    sum = "h1:EQciDnbrYxy13PgWoY8AqoxGiPrpgBZ1R8UNe3ddc+A=",
+    version = "v0.1.0",
+)
+
+go_repository(
+    name = "com_github_gogo_protobuf",
+    importpath = "github.com/gogo/protobuf",
+    sum = "h1:DqDEcV5aeaTmdFBePNpYsp3FlcVH/2ISVVM9Qf8PSls=",
+    version = "v1.3.1",
+)
+
+go_repository(
+    name = "com_github_prometheus_client_model",
+    importpath = "github.com/prometheus/client_model",
+    sum = "h1:gQz4mCbXsO+nc9n1hCxHcGA3Zx3Eo+UHZoInFGUIXNM=",
+    version = "v0.0.0-20190812154241-14fe0d1b01d4",
+)
+
+go_repository(
+    name = "org_golang_google_grpc",
+    importpath = "google.golang.org/grpc",
+    sum = "h1:rRYRFMVgRv6E0D70Skyfsr28tDXIuuPZyWGMPdMcnXg=",
+    version = "v1.27.0",
+)
+
+go_repository(
+    name = "org_golang_x_xerrors",
+    importpath = "golang.org/x/xerrors",
+    sum = "h1:E7g+9GITq07hpfrRu66IVDexMakfv52eLZ2CXBWiKr4=",
+    version = "v0.0.0-20191204190536-9bdfabe68543",
 )
