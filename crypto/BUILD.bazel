@@ -2,12 +2,17 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "go_default_library",
-    srcs = ["dilithium.go"],
+    srcs = [
+        "dilithium.go",
+        "types.go",
+    ],
     importpath = "github.com/theQRL/go-libp2p-qrl/crypto",
     visibility = ["//visibility:public"],
     deps = [
+        "//protos:go_default_library",
+        "@com_github_golang_protobuf//proto:go_default_library",
         "@com_github_libp2p_go_libp2p_core//crypto:go_default_library",
         "@com_github_libp2p_go_libp2p_core//crypto/pb:go_default_library",
-        "@com_github_theqrl_go_qrllib_crypto//dilithium:go_default_library",
+        "@com_github_theqrl_go_qrllib//dilithium:go_default_library",
     ],
 )
