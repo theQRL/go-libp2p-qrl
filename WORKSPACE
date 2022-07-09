@@ -419,8 +419,8 @@ go_repository(
 go_repository(
     name = "com_github_theqrl_go_qrllib",
     importpath = "github.com/theQRL/go-qrllib",
-    sum = "h1:+UDxiT/onH+TpxAvj7iS3llRKXQFPEvpa21uYyHhN0w=",
-    version = "v0.0.0-20201222125451-26856452460c",
+    sum = "h1:9PxMLUTWxy1Y+pAxrLfzFkD+5LNpWtGIQ1Dt+167cVI=",
+    version = "v0.0.0-20220709170248-6c0e87493188",
 )
 
 go_repository(
