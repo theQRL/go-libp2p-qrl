@@ -417,17 +417,10 @@ go_repository(
 )
 
 go_repository(
-    name = "com_github_theqrl_go_qrllib_crypto",
-    importpath = "github.com/theQRL/go-qrllib-crypto",
-    sum = "h1:/gKsfTtUgU0ghZpxL8NxEPv1JGSs6uTEHQY0cPqD8P8=",
+    name = "com_github_theqrl_go_qrllib",
+    importpath = "github.com/theQRL/go-qrllib",
+    sum = "h1:+UDxiT/onH+TpxAvj7iS3llRKXQFPEvpa21uYyHhN0w=",
     version = "v0.0.0-20201222125451-26856452460c",
-)
-
-go_repository(
-    name = "com_github_theqrl_qrllib",
-    importpath = "github.com/theQRL/qrllib",
-    sum = "h1:Kq1bbZiSUijTkIa1UY6ZrkVuBt5KHpxVcQsPggxFNQ4=",
-    version = "v1.2.2",
 )
 
 go_repository(

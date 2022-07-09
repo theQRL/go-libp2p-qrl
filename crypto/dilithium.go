@@ -8,8 +8,9 @@ import (
 	"github.com/libp2p/go-libp2p-core/crypto"
 	pb "github.com/libp2p/go-libp2p-core/crypto/pb"
 	"github.com/theQRL/go-libp2p-qrl/protos"
-	"github.com/theQRL/go-qrllib-crypto/dilithium"
+	"github.com/theQRL/go-qrllib/dilithium"
 	"io"
+	"reflect"
 )
 
 type DilithiumPrivateKey struct {
@@ -24,17 +25,18 @@ func GenerateDilithiumKey(src io.Reader) (crypto.PrivKey, crypto.PubKey, error) 
 	if !isLoaded {
 		return nil, nil, errors.New("LoadAllExtendedKeyTypes before using")
 	}
-	d := dilithium.NewDilithium()
-
+	d := dilithium.New()
+	sk := d.GetSK()
+	pk := d.GetPK()
 	return &DilithiumPrivateKey{
 			pb: &protos.DilithiumKeys{
-				Sk: d.SK(),
-				Pk: d.PK(),
+				Sk: sk[:],
+				Pk: pk[:],
 			},
 		},
 		&DilithiumPublicKey{
 			pb: &protos.DilithiumPublicKey{
-				Pk: d.PK(),
+				Pk: pk[:],
 			},
 		},
 		nil
@@ -60,8 +62,12 @@ func (sk *DilithiumPrivateKey) Sign(data []byte) ([]byte, error) {
 	h := sha256.New()
 	h.Write(data)
 	hash := h.Sum(nil)
-	d := dilithium.RecoverDilithium(sk.pb.Pk, sk.pb.Sk)
-	signature := d.Sign(hash)
+	var pkSized [dilithium.PKSizePacked]uint8
+	var skSized [dilithium.SKSizePacked]uint8
+	copy(pkSized[:], sk.pb.Pk)
+	copy(skSized[:], sk.pb.Sk)
+	d := dilithium.NewFromKeys(&pkSized, &skSized)
+	signature := d.Seal(hash)
 
 	return signature, nil
 }
@@ -94,8 +100,11 @@ func (pk *DilithiumPublicKey) Verify(data, sigBytes []byte) (bool, error) {
 	h := sha256.New()
 	h.Write(data)
 	hashedMessage := h.Sum(nil)
-	result := dilithium.DilithiumVerify(sigBytes, pk.pb.Pk, hashedMessage)
-	return result, nil
+
+	var pkSized [dilithium.PKSizePacked]uint8
+	copy(pkSized[:], pk.pb.Pk)
+
+	return reflect.DeepEqual(dilithium.Open(sigBytes, &pkSized), hashedMessage), nil
 }
 
 func basicEquals(k1, k2 crypto.Key) bool {
