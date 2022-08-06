@@ -4,10 +4,12 @@ import (
 	"crypto/sha256"
 	"crypto/subtle"
 	"errors"
+	"fmt"
 	"github.com/golang/protobuf/proto"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	pb "github.com/libp2p/go-libp2p-core/crypto/pb"
 	"github.com/theQRL/go-libp2p-qrl/protos"
+	"github.com/theQRL/go-qrllib/common"
 	"github.com/theQRL/go-qrllib/dilithium"
 	"io"
 	"reflect"
@@ -28,10 +30,12 @@ func GenerateDilithiumKey(src io.Reader) (crypto.PrivKey, crypto.PubKey, error) 
 	d := dilithium.New()
 	sk := d.GetSK()
 	pk := d.GetPK()
+	seed := d.GetSeed()
 	return &DilithiumPrivateKey{
 			pb: &protos.DilithiumKeys{
-				Sk: sk[:],
-				Pk: pk[:],
+				Sk:   sk[:],
+				Pk:   pk[:],
+				Seed: seed[:],
 			},
 		},
 		&DilithiumPublicKey{
@@ -64,10 +68,23 @@ func (sk *DilithiumPrivateKey) Sign(data []byte) ([]byte, error) {
 	hash := h.Sum(nil)
 	var pkSized [dilithium.PKSizePacked]uint8
 	var skSized [dilithium.SKSizePacked]uint8
+	var seed [common.SeedSize]uint8
+
 	copy(pkSized[:], sk.pb.Pk)
 	copy(skSized[:], sk.pb.Sk)
-	d := dilithium.NewFromKeys(&pkSized, &skSized)
+	copy(seed[:], sk.pb.Seed)
+
+	//d := dilithium.NewFromKeys(&pkSized, &skSized)
+	d := dilithium.NewDilithiumFromSeed(seed)
 	signature := d.Seal(hash)
+
+	if !reflect.DeepEqual(d.GetPK(), sk.pb.Pk) {
+		return nil, fmt.Errorf("pk mismatch")
+	}
+
+	if !reflect.DeepEqual(d.GetSK(), sk.pb.Sk) {
+		return nil, fmt.Errorf("sk mismatch")
+	}
 
 	return signature, nil
 }
