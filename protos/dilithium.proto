@@ -10,6 +10,7 @@ package protos;
 message DilithiumKeys {
     bytes sk = 1;
     bytes pk = 2;
+    bytes seed = 3;
 }
 
 message DilithiumPublicKey {
