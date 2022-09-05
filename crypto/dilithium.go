@@ -3,6 +3,7 @@ package crypto
 import (
 	"crypto/sha256"
 	"crypto/subtle"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"github.com/golang/protobuf/proto"
@@ -78,11 +79,13 @@ func (sk *DilithiumPrivateKey) Sign(data []byte) ([]byte, error) {
 	d := dilithium.NewDilithiumFromSeed(seed)
 	signature := d.Seal(hash)
 
-	if !reflect.DeepEqual(d.GetPK(), sk.pb.Pk) {
+	expectedPK := d.GetPK()
+	if hex.EncodeToString(expectedPK[:]) != hex.EncodeToString(sk.pb.Pk) {
 		return nil, fmt.Errorf("pk mismatch")
 	}
 
-	if !reflect.DeepEqual(d.GetSK(), sk.pb.Sk) {
+	expectedSK := d.GetSK()
+	if hex.EncodeToString(expectedSK[:]) != hex.EncodeToString(sk.pb.Sk) {
 		return nil, fmt.Errorf("sk mismatch")
 	}
 
